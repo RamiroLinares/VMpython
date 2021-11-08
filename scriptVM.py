@@ -1,4 +1,5 @@
 import virtualbox
+from virtualbox.library import StorageBus
 
 vbox = virtualbox.VirtualBox()
 print("List of available machines: ")
@@ -12,13 +13,16 @@ if(opt=="1"):
     name= input("Write the new VM name \n")
     #vbox.create_machine(vbox.machines[0].settings_file_path,name,groups,vbox.machines[0].os_type_id,vbox.machines[0].__uuid__)
     #vbox.create_machine(vbox.machines[0].settings_file_path,"test_vm",[],"Linux","")
-    opt2=input("Select an option \n 1.Create VM from scrach \n 2.Clone VM \n")
+    opt2=input("Select an option \n 1.Create VM from scratch \n 2.Clone VM \n")
     if(opt2=="1"):
-        print("new vm")
         settings_file=vbox.compose_machine_filename(name,"","","C:/Users/ramir/VirtualBox VMs")
         groups=list()
         groups.append("/")
         machine=vbox.create_machine(settings_file,name,groups,"","")
+        machine.add_storage_controller("SATA", virtualbox.library.StorageBus.sata)
+        machine.add_storage_controller("IDE", virtualbox.library.StorageBus.ide)
+        #machine.add_storage_controller("vdi","VDI")
+        #machine.add_storage_controller("sata","SATA")
         vbox.register_machine(machine)
     if(opt2=="2"):
         idClone=input("enter the id of the VM you want to clone \n")
