@@ -20,9 +20,10 @@ if(opt=="1"):
         groups.append("/")
         machine=vbox.create_machine(settings_file,name,groups,"","")
         machine.add_storage_controller("SATA", virtualbox.library.StorageBus.sata)
-        machine.add_storage_controller("IDE", virtualbox.library.StorageBus.ide)
-        #machine.add_storage_controller("vdi","VDI")
-        #machine.add_storage_controller("sata","SATA")
+        ide=machine.add_storage_controller("IDE", virtualbox.library.StorageBus.ide)
+        #baseint = (0, 0)
+        #machine.mount_medium("ide",ide,0,1,None)
+        
         vbox.register_machine(machine)
     if(opt2=="2"):
         idClone=input("enter the id of the VM you want to clone \n")
