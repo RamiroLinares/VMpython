@@ -10,11 +10,11 @@ for m in vbox.machines:
 opt = input("Select an option \n 1.Create VM \n 2.Delete VM \n 3.Launch VM \n")    
 
 if(opt=="1"):
-    #name= input("Write the new VM name \n")
+    name= input("Write the new VM name \n")
     #vbox.create_machine(vbox.machines[0].settings_file_path,name,groups,vbox.machines[0].os_type_id,vbox.machines[0].__uuid__)
     #vbox.create_machine(vbox.machines[0].settings_file_path,"test_vm",[],"Linux","")
     idClone=input("enter the id of the VM you want to clone \n")
-    vbox.machines[int(idClone)].clone(name="test")
+    vbox.machines[int(idClone)].clone(name=name)
 elif(opt=="2"):
     idDel=input("enter the id of the VM you want to delete \n")
     vbox.machines[int(idDel)].remove()
