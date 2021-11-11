@@ -1,5 +1,5 @@
 import virtualbox
-from virtualbox.library import StorageBus
+from virtualbox.library import IMediumAttachment, StorageBus
 
 def launchVMbyID(id):
     session = virtualbox.Session()
@@ -28,13 +28,21 @@ if(opt=="1"):
         machine=vbox.create_machine(settings_file,name,groups,"","")  
         machine.add_storage_controller("SATA", virtualbox.library.StorageBus.sata)
         ide=machine.add_storage_controller("IDE", virtualbox.library.StorageBus.ide)
-        #imedium=vbox.create_medium("VDI","C:/Users/ramir/VirtualBox VMs/test",virtualbox.library.AccessMode(1),virtualbox.library.DeviceType(2))
-        imedium=vbox.open_medium("C:/ramiro/jalasoft/DevOps/ubuntu.iso",virtualbox.library.DeviceType(2),virtualbox.library.AccessMode(1),False)
-        #attach iso 
-        #machine.mount_medium("IDE",0,1,imedium,False)
         vbox.register_machine(machine)
-        launchVMbyID(-1)
+        #imedium=vbox.create_medium("VDI","C:/Users/ramir/VirtualBox VMs/test",virtualbox.library.AccessMode(1),virtualbox.library.DeviceType(2))
+        imedium=vbox.open_medium("C:/ramiro/jalasoft/DevOps/fedora.iso",virtualbox.library.DeviceType(2),virtualbox.library.AccessMode(1),True)
         
+        session = virtualbox.Session()
+        machine.lock_machine(session, virtualbox.library.LockType.write)
+        mutable= session.machine
+
+        mutable.attach_device("IDE",0,0,virtualbox.library.DeviceType(2),imedium)
+        machine.mount_medium("IDE2",0,0,imedium,False)
+        #no drive attached still
+
+        mutable.save_settings()
+        session.unlock_machine()
+        launchVMbyID(-1)
     if(opt2=="2"):
         idClone=input("enter the id of the VM you want to clone \n")
         vbox.machines[int(idClone)].clone(name=name)
