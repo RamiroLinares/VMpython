@@ -3,7 +3,7 @@
 #About the scriptVM.py
 
 At start, we have 3 options, this use virtualbox from PyPI, we can create a VM
-delete any VM, or launch any VM with his corresponding ids. The script is very easy
+delete any VM, or launch any VM with the corresponding ids. The script is very easy
 to use so run it and the console will guide you.
 
 #About the creation of VMs
