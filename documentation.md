@@ -99,27 +99,36 @@ docker run -d -p 3001:3001 jalafoundation/dose-content-server
  "psql"
  
  9_Create the dbs needed (in Dose documentation says you need dose and MovieServer)
+ 
 CREATE DATABASE dose;
+ 
 CREATE DATABASE MovieServer;
  
  10_
 Go back to dev-1 again and go to the postgres special dir
+ 
  "cd /docker-entrypoint-initdb.d"
  
  11_execute both sql (db_schema.sql and db_schema2.sql or any name)
+ 
  "docker cp ./localfile.sql containername:/container/path/file.sql"
+ 
  "docker exec -u postgresuser containername psql dbname postgresuser -f /container/path/file.sql"
  
  For our case:
+ 
 docker cp ./db_schema.sql stoic_franklin:/docker-entrypoint-initdb.d/db_schema.sql
+ 
 docker exec -u postgres stoic_franklin psql movieServer postgres -f docker-entrypoint-initdb.d/db_schema.sql
  
 docker cp ./db_schema2.sql stoic_franklin:/docker-entrypoint-initdb.d/db_schema2.sql
+ 
 docker exec -u postgres stoic_franklin psql movieServer postgres -f docker-entrypoint-initdb.d/db_schema2.sql
 
  This 'll create the tables needed for our Dose project (but empty)
  
  12_go back to psql and insert a user_server (Dose documentation) (step 8)
+ 
 use your ip of your vm but the next its for example
  
 INSERT INTO server (server_id,server_ip,server_name) VALUES (1,'10.0.10.11', 'dose');
