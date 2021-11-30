@@ -1,4 +1,4 @@
-# VMpython
+# DevOps Bootcamp
 
 #About the scriptVM.py
 
