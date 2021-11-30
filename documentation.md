@@ -63,29 +63,39 @@ docker pull bitnami/jenkins
  
  1_Copy the sql needed(db_schema.sql in contentServer and in mainServer) to a folder and mount py server 
 "python -m http.server 3000"
+ 
 get om vm
+ 
 wget http://iphost:3000/db_schema.sql
+ 
 wget http://iphost:3000/db_schema2.sql
  
  You need the next special dir for postgres:
+ 
  2_In dev-1, sudo mkdir /docker-entrypoint-initdb.d
  
  3_In dev-1, you can look your pulled images with "docker images"
  
  4_ Docker run ll make your images as container and running services
+ 
  docker run -d -p 5432:5432 -e POSTGRES_HOST_AUTH_METHOD=trust postgres:latest
  
  5_docker run -d -p 3000:3000 jalafoundation/dose-main-server:latest
  
  6_This will not run because you dont have the db
+ 
 docker run -d -p 3001:3001 jalafoundation/dose-content-server
  
  7_you can see the cointainer names and ids with:
+ 
 "docker ps"
  
  8_next you need to go to the psql (postgres sql)
+ 
  "docker exec -it idPostgresCointainer bash"
+ 
  "su postgres"
+ 
  "psql"
  
  9_Create the dbs needed (in Dose documentation says you need dose and MovieServer)
