@@ -14,3 +14,16 @@ The creation of VMs from scratch is still a work in progress
 #About ssh protocols, keys, configurations, and more
 
 Go to documention.md for this info
+
+#Important Files
+
+Dose Project:
+https://github.com/RamiroLinares/Dose/blob/enable_ci
+JenkinsFile:
+https://github.com/RamiroLinares/Dose/blob/enable_ci/Jenkinsfile
+
+Documentation:
+Documentation.md
+
+Vagrant File:
+VAGRANTFILE.CI
